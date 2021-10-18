@@ -30,11 +30,6 @@ class ProducerRabbitConfiguration {
             .build()
     }
 
-//    @Bean
-//    fun deadLetterQueue(): Queue {
-//        return Queue(deadLetterQueue)
-//    }
-
     @Bean
     fun queue(): Queue? {
         return QueueBuilder.durable(queue)
@@ -42,14 +37,6 @@ class ProducerRabbitConfiguration {
             .deadLetterRoutingKey(deadLetterQueue)
             .build()
     }
-
-//    @Bean
-//    fun queue(): Queue {
-//        var map = HashMap<String, Any>()
-//        map.put("x-dead-letter-queue", exchange)
-//        map.put("x-dead-letter-routing-key", deadLetterQueue)
-//        return Queue(queue, true, false, false, map)
-//    }
 
     @Bean
     fun bindingQueue(): Binding {
