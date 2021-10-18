@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: notification-producer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    exchange:
+      producer: ex-producer-notification
+    routing-key:
+      producer: key-producer-notification
+    dead-letter:
+      producer: dlq-producer-notification
+
+server:
+  port: 8081
