@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 
-
 @Configuration
 class RabbitMQConfiguration(@Autowired private val connectionFactory: ConnectionFactory) {
 
@@ -27,19 +26,19 @@ class RabbitMQConfiguration(@Autowired private val connectionFactory: Connection
     fun simpleRabbitListenerContainerFactory(): SimpleRabbitListenerContainerFactory? {
         val factory = SimpleRabbitListenerContainerFactory()
         factory.setConnectionFactory(connectionFactory)
-        factory.setMessageConverter(jacksonConverter())
+        factory.setMessageConverter(jsonConverter())
         return factory
     }
 
     @Bean
     fun rabbitTemplate(): RabbitTemplate {
         val rabbitTemplate = RabbitTemplate(connectionFactory)
-        rabbitTemplate.messageConverter = jacksonConverter()
+        rabbitTemplate.messageConverter = jsonConverter()
         return rabbitTemplate
     }
 
     @Bean
-    fun jacksonConverter(): MessageConverter {
+    fun jsonConverter(): MessageConverter {
         val mapper = Jackson2ObjectMapperBuilder
             .json()
             .modules(JavaTimeModule())

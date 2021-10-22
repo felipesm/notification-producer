@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class ServiceProducerRabbitMQ {
+class ProducerServiceRabbitMQ {
 
     @Autowired
     private val producerRabbitMQ: ProducerAmqp<Notification> = ProducerRabbitMQ()
 
-    fun produceMessage(notification: Notification): Boolean {
+    fun produceNotification(notification: Notification): Boolean {
         return try {
             producerRabbitMQ.producer(notification)
             true

@@ -1,7 +1,7 @@
 package com.ifdeveloper.notificationproducer.resources
 
 import com.ifdeveloper.notificationproducer.domain.Notification
-import com.ifdeveloper.notificationproducer.services.ServiceProducerRabbitMQ
+import com.ifdeveloper.notificationproducer.services.ProducerServiceRabbitMQ
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpEntity
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController
 class ProducerResource {
 
     @Autowired
-    private val serviceRabbitMQ = ServiceProducerRabbitMQ()
+    private val serviceRabbitMQ = ProducerServiceRabbitMQ()
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @PostMapping("/notification")
     fun produceNotification(@RequestBody notification: Notification) : HttpEntity<Any> {
         logger.info("produce notification - $notification")
-        val success = serviceRabbitMQ.produceMessage(notification)
+        val success = serviceRabbitMQ.produceNotification(notification)
         return if (success) {
             logger.info("produced notification - $notification")
             ResponseEntity.accepted().build()
