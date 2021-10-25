@@ -18,25 +18,32 @@ Fazer o clone do projeto do github e importar na IDE:
 Executar o seguinte comando para fazer download da imagem do RabbitMQ:
 > $ docker run -d --hostname localhost --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 
+Para acessar a interface de gerenciamento do RabbitMQ utilizar a URL abaixo, digitando no seu usuário e senha **guest**.
+> http://localhost:15672/
+
 Ao startar a aplicação ela subirá na porta 8081. Em seguida poderá ser usado o Postman para fazer a requisição no endpoint que produzirá a mensagem.
 
 * **URL**
 
-  http://localhost:8081/producer/notification
+  http://localhost:8081
 
-* **Método**
+  * EndPoint
   
-  POST
-```json
-{
-    "subject": "subject",
-    "message": "message lorem ipsum",
-    "from": "message from",
-    "to": "message to",
-    "createdAt": "yyyy-MM-ddTHH:mm:ss.000"
-}
-```
+    /producer/notification
 
-*  **Resposta Sucesso**
+  * **Método**
+  
+      POST
+    ```json
+    {
+        "subject": "subject",
+        "message": "message lorem ipsum",
+        "from": "message from",
+        "to": "message to",
+        "createdAt": "yyyy-MM-ddTHH:mm:ss.000"
+    }
+    ```
 
-   Code: 202 - Accepted<br>
+  *  **Resposta Sucesso**
+
+      Code: 202 - Accepted<br>
